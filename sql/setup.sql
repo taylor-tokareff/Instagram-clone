@@ -8,9 +8,8 @@ CREATE TABLE users (
 );
 CREATE TABLE grams (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  user_name BIGINT REFERENCES users(id),
-  text VARCHAR(255) NOT NULL,
-  profile_photo_url TEXT NOT NULL,
+  user_id BIGINT REFERENCES users(id),
+  photo_url TEXT NOT NULL,
   caption TEXT NOT NULL,
   tags TEXT NOT NULL
 );
