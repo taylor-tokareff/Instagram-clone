@@ -1,0 +1,16 @@
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS grams CASCADE;
+CREATE TABLE users (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  user_name TEXT NOT NULL UNIQUE,
+  password_hash TEXT NOT NULL,
+  profile_photo_url TEXT NOT NULL
+);
+-- CREATE TABLE grams (
+--   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+--   userName BIGINT REFERENCES users(id),
+--   text VARCHAR(255) NOT NULL,
+--   photoUrl TEXT NOT NULL,
+--   -- caption TEXT NOT NULL,
+--   tags TEXT NOT NULL
+-- );
