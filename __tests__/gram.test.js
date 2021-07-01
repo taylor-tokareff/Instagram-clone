@@ -92,7 +92,7 @@ describe('demo routes', () => {
       tags: '#imposter'
     });
 
-    const res = await request(app).delete(`/api/v1/grams/${gram1.id}`);
+    const res = await agent.delete(`/api/v1/grams/${gram1.id}`);
 
     expect(res.body).toEqual(gram1);
 
@@ -113,7 +113,6 @@ describe('demo routes', () => {
     };
 
     const res = await agent.put(`/api/v1/grams/${gram1.id}`).send(gram2);
-    // console.log(res.body);
     expect(res.body).toEqual({
       id: '1',
       userId: '1',
