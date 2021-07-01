@@ -3,10 +3,11 @@ import setup from '../data/setup.js';
 import request from 'supertest';
 import app from '../lib/app.js';
 
+
 const agent = request.agent(app);
 
 describe('demo routes', () => {
-  beforeAll(() => {
+  beforeEach(() => {
     return setup(pool);
   });
 
@@ -27,14 +28,20 @@ describe('demo routes', () => {
   });
 
   test('login a user via POST', async () => {
-    const res = await agent
-      .post('/api/v1/auth/login')
+    await request(app)
+      .post('/api/v1/auth/signup')
       .send({
         userName: 'Peaches',
         password: 'password',
         profilePhotoUrl: 'https://place-puppy.com/300x300'
       });
-
+    const res = await agent
+      .post('/api/v1/auth/login')
+      .send({
+        userName: 'Peaches',
+        password: 'password',
+        // profilePhotoUrl: 'https://place-puppy.com/300x300'
+      });
     expect(res.body).toEqual({
       id: '1',
       userName: 'Peaches',
@@ -42,22 +49,5 @@ describe('demo routes', () => {
     });
   });
 
-  test('creates a gram via POST', async () => {
-    const res = await agent
-      .post('/api/v1/grams')
-      .send({
-        photoUrl: 'https://place-puppy.com/300x300',
-        caption: 'not actually Peaches',
-        tags: '#imposter'
-      });
-
-    expect(res.body).toEqual({
-      id: '1',
-      userId: '1',
-      photoUrl: 'https://place-puppy.com/300x300',
-      caption: 'not actually Peaches',
-      tags: '#imposter'
-    });
-  });
 });
 
